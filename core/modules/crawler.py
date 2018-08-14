@@ -53,8 +53,6 @@ class Crawler(object):
                     page = future.result()
                     links = self.get_links(self.get_content(page.content))
                     self.save_on_db(links, db)
-                    # for link in links:
-                    #     print(link)
                 except Exception as exc:
                     print('%r generated an exception: %s' % (url, exc))
 

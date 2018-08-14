@@ -7,7 +7,7 @@ from core.db.products import Product_db
 from core.utils.parser import Parser
 from pika import BlockingConnection, ConnectionParameters
 
-__author__ = 'lucas'
+__author__ = 'asafe'
 
 
 class Processor(object):

@@ -18,9 +18,9 @@ class Product_db(object):
 
     def update_status_products(self, keys, status):
         products = self._db.query(Product).filter(Product.id.in_(keys))
-        for p in products:
-            p.status = status
-            self._db.add(p)
+        for product in products:
+            product.status = status
+            self._db.add(product)
 
         self._db.commit()
 
