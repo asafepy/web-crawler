@@ -6,12 +6,39 @@ from core.db.database import get_engine_db
 from core.db.products import Product_db
 from core.utils.parser import Parser
 from pika import BlockingConnection, ConnectionParameters
-
+from core.modules.crawler import Crawler
 __author__ = 'asafe'
+
+
 
 
 class Processor(object):
     _test = False
+
+    @classmethod
+    def get_urls(self):
+        product_db = Product_db(get_engine_db(self._test))
+        products = product_db.get_products_for_status('WAIT')
+        return products
+
+    @classmethod
+    def parser_and_update(self, key, url):
+
+        content = Parser(url)
+        Product_db(get_engine_db(self._test)).update_product(
+            key, content.get_title(), content.get_name(), 'PROCESSED'
+        )
+
+if __name__ == "__main__":
+
+    p = Processor()
+    for product in p.get_urls():
+        p.parser_and_update(product.id, product.url)
+
+'''
+class Processor(object):
+    _test = False
+
 
     @classmethod
     def parser_and_update(cls, args):
@@ -62,3 +89,4 @@ if __name__ == "__main__":
 
     print(' [*] Waiting for messages. To exit press CTRL+C')
     channel.start_consuming()
+'''
