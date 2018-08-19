@@ -1,4 +1,4 @@
-# captura
+# Desafio Crawler
 
 O objetivo deste código é criar um crawler que visite o site epocacosmeticos.com.br e salve um arquivo .csv com o nome do produto, o título e a url de cada página de produto encontrada.
 
@@ -38,16 +38,22 @@ Regras:
         python setup.py install
  
  - Criar  Banco de dados da Aplicação;
-        python core/db/database.py
+		python core/db/database.py
  
  - Rodar Crawler;  
-        python core/modules/crawler.py
+		python core/modules/crawler.py
         
 - Rodar o Processor;
         python core/modules/processor.py
 
 - Rodar o Indexer:
         python core/modules/indexer.py
+
+- Utilizando Makefile
+	
+```console
+make run
+```
 
 ## Módulos (core/modules) 
  
