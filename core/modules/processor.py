@@ -32,8 +32,14 @@ class Processor(object):
 if __name__ == "__main__":
 
     p = Processor()
+
     for product in p.get_urls():
-        p.parser_and_update(product.id, product.url)
+        try:
+            p.parser_and_update(product.id, product.url)
+        except Exception as exc:
+            print('%r generated an exception: %s' % (product.url, exc))
+            continue
+        
 
 '''
 class Processor(object):

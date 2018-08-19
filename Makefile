@@ -19,7 +19,7 @@ indexer:
 
 
 processor:
-	python core/modules/processor.py -w 4 -q 'queue_name'
+	python core/modules/processor.py
 
 
-run: remove_csv create_db crawler indexer
+run: remove_csv create_db crawler processor indexer
