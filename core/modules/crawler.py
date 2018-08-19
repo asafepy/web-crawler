@@ -58,11 +58,7 @@ class Crawler(object):
 
 
 if __name__ == '__main__':
-    """
-    Realiza a captura de todos os links de produto de urls do site..
-    www.epocacosmeticos
-    url default: 'http://www.epocacosmeticos.com.br'
-    """
+    
     urls = ['http://www.epocacosmeticos.com.br']
     crawler = Crawler(urls)
     crawler.run()
