@@ -3,7 +3,6 @@ import random as rand
 
 from string import ascii_letters
 from core.db.model import Base, Product
-from pika import BlockingConnection, ConnectionParameters
 from random import choice
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
@@ -66,14 +65,3 @@ def insert_products(products, engine):
         p = Product(**product)
         session_db.add(p)
         session_db.commit()
-
-
-# def connection_queue(queue='test'):
-#     connection = BlockingConnection(ConnectionParameters(host='localhost'))
-#     return connection
-
-
-# def close_conn_queue(connection, queue='test'):
-#     channel = connection.channel()
-#     channel.queue_delete(queue)
-#     connection.close()

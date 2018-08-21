@@ -8,3 +8,4 @@ captura.db
 db.sqlite3
 __pycache__/
 build/
+.pytest_cache/

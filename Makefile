@@ -27,5 +27,6 @@ indexer:
 	python core/modules/indexer.py
 
 
+# pytest -q core/tests/test_crawler.py
 
 run: remove_csv reload_db_force crawler processor indexer open_csv
