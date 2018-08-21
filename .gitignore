@@ -6,3 +6,4 @@ captura.db
 *.pyc
 db.sqlite3
 __pycache__/
+build/
