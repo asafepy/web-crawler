@@ -31,22 +31,22 @@ Rules:
 
 # How to Run:
 
- - Install Requirements and the Application;  
-	pip install -r requirements.txt
+1. Install Requirements and the Application;  
+	- pip install -r requirements.txt
  
- - Create Application Database;
-	python core/db/database.py
+2. Create Application Database;
+	- python core/db/database.py
  
- - Rotate Crawler;  
-	python core/modules/crawler.py
+3. Rotate Crawler;  
+	- python core/modules/crawler.py
         
-- Rotating the Processor;
+4. Rotating the Processor;
 	python core/modules/processor.py
 
-- Rotate Indexer:
-	python core/modules/indexer.py
+5. Rotate Indexer:
+	- python core/modules/indexer.py
 
-- Using Makefile
+7. Using Makefile
 	
 ```console
 make run
@@ -54,5 +54,16 @@ make run
 
 ## Módulos (core/modules) 
  
-### crawler.py
-   - Responsável por capturar os links da url informada.  
+### crawler.py (MultiThread)
+- Responsible for capturing links from the url informed.
+
+
+
+### processor.py (Multiprocess)
+- Responsible for reading the raw information in the database (WAIT) and updating it.
+- This is a multiprocess application, you can keep running in the background and you can upload as many applications as you want, you can add more machines and / or more processes to increase the processing speed.
+
+
+### indexer.py (SingleProcess)
+- Responsible for generating the csv file, queries the database for all records processed and indexes in a csv worksheet.
+- The indexer can be rotated whenever you want, refreshing the spreadsheet data. if you do not have new data that has been processed nothing will be indexed. But if the processor has consumed new messages and updated information the worksheet will be updated with these new values.
