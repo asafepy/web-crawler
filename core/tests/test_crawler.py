@@ -1,7 +1,14 @@
-# test_capitalize.py
 import random
 import pytest
+
+from sqlalchemy.orm import Session
+
+from core.db.model import Product
 from core.modules.crawler import Crawler
+from core.tests.fixtures.helper import gen_engine
+
+__author__ = 'asafe'
+
 
 def gen_links(n, repeat=0, n_other_links=2):
     product_links = [
@@ -46,3 +53,17 @@ def test_get_links(html, expected):
     page_content = Crawler.get_content(html)
     links = Crawler.get_links(page_content)
     assert len(links) == expected
+
+
+@pytest.mark.parametrize("html, expected", [
+    (gen_html_doc(gen_links(2)), 2),
+    (gen_html_doc(gen_links(4, 1)), 3),
+    (gen_html_doc(gen_links(5, 3)), 3),
+])
+def test_save_on_db(html, expected, gen_engine):
+    page_content = Crawler.get_content(html)
+    links = Crawler.get_links(page_content)
+    db_session = Session(bind=gen_engine)
+    Crawler.save_on_db(links, db_session)
+    products = db_session.query(Product).all()
+    assert len(list(products)) == expected
