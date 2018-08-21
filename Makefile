@@ -1,7 +1,7 @@
 .SILENT:
 
 #------------------------------------------------------------------
-# Init webserver
+# Init Web Crawler
 #------------------------------------------------------------------
 
 install:
@@ -10,19 +10,22 @@ install:
 remove_csv:
 	rm -f product.csv
 
-reload_create_db:
+open_csv:
+	vi product.csv
+
+reload_db_force:
 	rm -f captura.db
 	python core/db/database.py
 
 crawler:
 	python core/modules/crawler.py
 
+processor:
+	python core/modules/processor.py
+
 indexer:
 	python core/modules/indexer.py
 
 
-processor:
-	python core/modules/processor.py
 
-
-run: remove_csv reload_create_db crawler processor indexer
+run: remove_csv reload_db_force crawler processor indexer open_csv

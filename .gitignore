@@ -1,3 +1,4 @@
+.virtualenv
 product.csv
 *.sqlite3
 *.db
