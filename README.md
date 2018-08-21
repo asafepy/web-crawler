@@ -21,8 +21,8 @@ Rules:
  5. run the project.
  
  ```console
- git clone git@github.com:lffsantos/captura.git
- cd captura
+ git clone git@github.com:asafepy/crawler-challenge.git
+ cd crawler-challenge
  virtualenv -p python3 .virtualenv
  source .virtualenv/bin/activate
  pip install -r requirements.txt
