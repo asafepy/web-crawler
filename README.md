@@ -21,7 +21,7 @@ Rules:
  5. run the project.
  
  ```console
- git clone git@github.com:asafepy/crawler-challenge.git
+ git clone https://github.com/asafepy/crawler-challenge.git
  cd crawler-challenge
  virtualenv -p python3 .virtualenv
  source .virtualenv/bin/activate
