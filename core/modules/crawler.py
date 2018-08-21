@@ -36,7 +36,6 @@ class Crawler(object):
             url = link.get('href')
             product = db.query(Product).filter_by(url=url)
             if len(list(product)) == 1:
-                # this product already exists on database
                 continue
 
             product = Product(url=link.get('href'))

@@ -52,7 +52,7 @@ Rules:
 make run
 ```
 
-## Módulos (core/modules) 
+## Modules (core/modules) 
  
 ### crawler.py (MultiThread)
 - Responsible for capturing links from the url informed.
