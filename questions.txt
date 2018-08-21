@@ -1,0 +1,20 @@
+Responda às seguintes questões de forma discursiva:
+
+Agora você tem de capturar dados de outros 100 sites. Quais seriam suas estratégias para escalar a aplicação?
+
+Some sites charge the price through JavaScript. How would you capture this value.
+
+	We can outsource the task of rendering the entire page to a web browser. So, instead of using the HTML downloaded by Python, let's have a browser download the page and run the JS code for us and deliver the HTML ready response. A cool option for this is PhantomJS, which is a headless browser and can be easily integrated with Python via Selenium.
+
+
+
+Some sites may block the capture of your data as a DDOS attack. How would you deal with this situation?
+
+	Controlling the rate of crawling is beneficial for us, and for the website we are scraping. If we avoid hammering the server with tens of requests per second, then we are much less likely to get our IP address banned. We also avoid disrupting the activity of the website we scrape by allowing the server to respond to other users' requests too.
+
+	We'll control the loop's rate by using the sleep() function from Python's time module. sleep() will pause the execution of the loop for a specified amount of seconds.
+
+	To mimic human behavior, we'll vary the amount of waiting time between requests by using the randint() function from the Python's random module. randint() randomly generates integers within a specified interval.
+
+Um cliente liga reclamando que está fazendo muitos acessos ao seu site e aumentando seus custos com infra. Como resolveria esse problema?
+

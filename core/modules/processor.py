@@ -1,15 +1,15 @@
 import argparse
 import concurrent.futures
 import json
+import re
+from multiprocessing import Process
 
 from core.db.database import get_engine_db
 from core.db.products import Product_db
 from core.utils.parser import Parser
-from pika import BlockingConnection, ConnectionParameters
 from core.modules.crawler import Crawler
+
 __author__ = 'asafe'
-
-
 
 
 class Processor(object):
@@ -29,70 +29,39 @@ class Processor(object):
             key, content.get_title(), content.get_name(), 'PROCESSED'
         )
 
+    @classmethod
+    def validate_url(self, url):
+    
+        regex = re.compile(
+            r'^(?:http|ftp)s?://' # http:// or https://
+            r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|' #domain...
+            r'localhost|' #localhost...
+            r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})' # ... ip
+            r'(?::\d+)?' # optional port
+            r'(?:/?|[/?]\S+)$', re.IGNORECASE
+        )
+        return re.match(regex, url)
+
+
+    
 if __name__ == "__main__":
 
-    p = Processor()
+    processor = Processor()
 
-    for product in p.get_urls():
-        try:
-            p.parser_and_update(product.id, product.url)
-        except Exception as exc:
-            print('%r generated an exception: %s' % (product.url, exc))
-            continue
+    def multiprocessed():
         
+        processes = []
+        
+        for product in processor.get_urls():
+            if processor.validate_url(product.url):
+                process = Process(target=processor.parser_and_update, args=(product.id, product.url))
+                processes.append(process)
 
-'''
-class Processor(object):
-    _test = False
-
-
-    @classmethod
-    def parser_and_update(cls, args):
-        key, url = args
-        content = Parser(url)
-        Product_db(get_engine_db(cls._test)).update_product(
-            key, content.get_title(), content.get_name(), 'PROCESSED'
-        )
-
-    @classmethod
-    def run_processor(cls, body, workers, test=False):
-        cls._test = test
-        with concurrent.futures.ProcessPoolExecutor(max_workers=workers) as executor:
-            for arg, _ in zip(body, executor.map(cls.parser_and_update, body)):
-                print(" %r updated" % arg)
+        for p in processes:
+            p.start()
+        
+        for p in processes:
+            p.join()
 
 
-if __name__ == "__main__":
-    """
-    Faz a leitura das mensagens na fila conectando nas urls recebidas na
-    mensagem e preenche as informações adicionais do produto como
-    título e nome.
-    e.g : python processor.py -w workers -q queue_name
-
-    """
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-w", "--workers", type=int, default=4,
-                        help="number of workers for parallel processing")
-    parser.add_argument("-q", "--queue", help="queue name to connect to")
-    parser.add_argument("-t", "--test", type=bool, default=False,
-                        help="sqs queue name to connect to")
-    args = parser.parse_args()
-
-    if not args.queue:
-        raise ValueError("Queue name must not be None")
-
-    connection = BlockingConnection(ConnectionParameters(host='localhost'))
-    channel = connection.channel()
-
-    def callback(ch, method, properties, body):
-        print(" [x] Received %r" % json.loads(body.decode('utf-8')))
-        Processor.run_processor(
-            json.loads(body.decode('utf-8')), args.workers, args.test
-        )
-        print(" [x] Done")
-
-    channel.basic_consume(callback, queue=args.queue, no_ack=True)
-
-    print(' [*] Waiting for messages. To exit press CTRL+C')
-    channel.start_consuming()
-'''
+    multiprocessed()

@@ -1,26 +1,24 @@
-# Desafio Crawler
+# Crawler Challenge
 
-O objetivo deste código é criar um crawler que visite o site epocacosmeticos.com.br e salve um arquivo .csv com o nome do produto, o título e a url de cada página de produto encontrada.
+The purpose of this code is to create a crawler that visits the site epocacosmeticos.com.br and save a .csv file with the product name, title and url of each product page found.
 
-Regras:
+Rules:
  
- - Esse arquivo não deve conter entradas duplicadas;
- - Não é permitido usar o sitemap para pegar todas as urls do site; o site deve de fato ser visitado e parseado para se obter as informações.
- - Exceto pelo Scrapy, você pode usar os frameworks e bibliotecas que quiser, desde que a linguagem principal usada seja Python (2.7, 3.x, PyPy... tanto faz).
+ - This file should not contain duplicate entries;
+ - It is not allowed to use the sitemap to get all urls from the site; the site must in fact be visited and parsed to obtain the information;
+ - Except for Scrapy, you can use the frameworks and libraries you want, as long as the main language used is Python;
  
  
-# Necessário
+# Required
  - Python 3
- <!-- - RabbitMq (https://www.rabbitmq.com/) -->
  
-# Como Desenvolver
+# How to install
 
- 1. clone o respositório.
- 2. crie uma virtualenv com Python 3.5. (https://virtualenv.pypa.io/en/stable/)
- 3. Ative o virtualenv.
- 4. Instale as dependências.
- 5. Instale o projeto
- 6. Execute os testes.
+ 1. clone the repository.
+ 2. create a virtualenv with Python 3.5. (https://virtualenv.pypa.io/en/stable/)
+ 3. activate virtualenv.
+ 4. install the dependencies. (pip install -r requirements.txt)
+ 5. run the project.
  
  ```console
  git clone git@github.com:lffsantos/captura.git
@@ -28,28 +26,27 @@ Regras:
  virtualenv -p python3 .virtualenv
  source .virtualenv/bin/activate
  pip install -r requirements.txt
- py.test
+ make run
 ```
 
-# Como Executar:
+# How to Run:
 
- - Instalar Requirements e a Aplicação;  
-        pip install -r requirements.txt  
-        python setup.py install
+ - Install Requirements and the Application;  
+        pip install -r requirements.txt
  
- - Criar  Banco de dados da Aplicação;
+ - Create Application Database;
 		python core/db/database.py
  
- - Rodar Crawler;  
+ - Rotate Crawler;  
 		python core/modules/crawler.py
         
-- Rodar o Processor;
+- Rotating the Processor;
         python core/modules/processor.py
 
-- Rodar o Indexer:
+- Rotate Indexer:
         python core/modules/indexer.py
 
-- Utilizando Makefile
+- Using Makefile
 	
 ```console
 make run
