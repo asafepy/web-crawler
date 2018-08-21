@@ -32,19 +32,19 @@ Rules:
 # How to Run:
 
  - Install Requirements and the Application;  
-        pip install -r requirements.txt
+	pip install -r requirements.txt
  
  - Create Application Database;
-		python core/db/database.py
+	python core/db/database.py
  
  - Rotate Crawler;  
-		python core/modules/crawler.py
+	python core/modules/crawler.py
         
 - Rotating the Processor;
-        python core/modules/processor.py
+	python core/modules/processor.py
 
 - Rotate Indexer:
-        python core/modules/indexer.py
+	python core/modules/indexer.py
 
 - Using Makefile
 	
