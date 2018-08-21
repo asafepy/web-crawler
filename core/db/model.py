@@ -9,6 +9,7 @@ Base = declarative_base()
 
 STATUS_CHOICES = (
     ('WAIT', 'wait'),
+    ('PROCESSED', 'Processed'),
     ('INDEXED', 'Indexed'),
 )
 

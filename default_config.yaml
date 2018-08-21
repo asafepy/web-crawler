@@ -1,3 +1,2 @@
-raabbitmq_server: localhost
 database: sqlite:///captura.db
 local_file_name: product.csv

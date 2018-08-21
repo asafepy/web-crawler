@@ -30,4 +30,5 @@ if __name__ == '__main__':
     
     product_db = Product_db(get_engine_db())
     products = product_db.get_products_for_status('PROCESSED')
+    print(products)
     Indexer.export_data_to_csv(appconfig['local_file_name'], products)
