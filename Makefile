@@ -4,6 +4,9 @@
 # Init webserver
 #------------------------------------------------------------------
 
+install:
+	python setup.py install
+
 remove_csv:
 	rm -f product.csv
 

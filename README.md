@@ -26,6 +26,7 @@ Rules:
  virtualenv -p python3 .virtualenv
  source .virtualenv/bin/activate
  pip install -r requirements.txt
+ make install
  make run
 ```
 

@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 class Parser(object):
 
     def __init__(self, url):
-    	self.url = url
+        self.url = url
         self.session = requests.Session()
         html = self.session.get(url)
         self.content_page = BeautifulSoup(html.content, "html.parser")
