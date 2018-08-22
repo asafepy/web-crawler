@@ -29,18 +29,14 @@ class Processor(object):
         Product_db(get_engine_db(self._test)).update_product(
             key, content.get_title(), content.get_name(), 'PROCESSED'
         )
-    
-if __name__ == "__main__":
 
-    processor = Processor()
-
-    def multiprocessed():
+    @classmethod
+    def run_processor(self):
         
         processes = []
-
-        for product in processor.get_urls():
+        for product in self.get_urls():
             if validate_url( product.url ):
-                process = Process(target=processor.parser_and_update, args=(product.id, product.url))
+                process = Process(target=self.parser_and_update, args=(product.id, product.url))
                 processes.append(process)
 
         for p in processes:
@@ -48,8 +44,14 @@ if __name__ == "__main__":
         
         for p in processes:
             p.join()
+    
 
-    multiprocessed()
+
+
+if __name__ == "__main__":
+
+
+    Processor.run_processor()
 
 
     
