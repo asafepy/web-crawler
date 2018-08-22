@@ -42,7 +42,7 @@ Rules:
 	- python core/modules/crawler.py
         
 4. Rotating the Processor;
-	python core/modules/processor.py
+	- python core/modules/processor.py
 
 5. Rotate Indexer:
 	- python core/modules/indexer.py
