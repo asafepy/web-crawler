@@ -1,4 +1,4 @@
-# Crawler Challenge
+# Web Crawler
 
 The purpose of this code is to create a crawler that visits the site epocacosmeticos.com.br and save a .csv file with the product name, title and url of each product page found.
 
